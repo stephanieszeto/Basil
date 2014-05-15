@@ -7,13 +7,21 @@
 //
 
 #import "AppDelegate.h"
+#import "TipViewController.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
+
+    // coloring
+    application.statusBarHidden = NO;
+    application.statusBarStyle = UIStatusBarStyleLightContent;
+    
+    TipViewController *tvc = [[TipViewController alloc] init];
+    self.window.rootViewController = tvc;
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;

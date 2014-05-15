@@ -19,6 +19,8 @@
 		90ABED061924386C00D7E207 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90ABECEE1924386C00D7E207 /* UIKit.framework */; };
 		90ABED0E1924386C00D7E207 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 90ABED0C1924386C00D7E207 /* InfoPlist.strings */; };
 		90ABED101924386C00D7E207 /* BasilTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 90ABED0F1924386C00D7E207 /* BasilTests.m */; };
+		90ABED1C192438B200D7E207 /* TipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90ABED1A192438B200D7E207 /* TipViewController.m */; };
+		90ABED1D192438B200D7E207 /* TipViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90ABED1B192438B200D7E207 /* TipViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,9 @@
 		90ABED0B1924386C00D7E207 /* BasilTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BasilTests-Info.plist"; sourceTree = "<group>"; };
 		90ABED0D1924386C00D7E207 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		90ABED0F1924386C00D7E207 /* BasilTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BasilTests.m; sourceTree = "<group>"; };
+		90ABED19192438B200D7E207 /* TipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TipViewController.h; path = "View Controllers/TipViewController.h"; sourceTree = "<group>"; };
+		90ABED1A192438B200D7E207 /* TipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TipViewController.m; path = "View Controllers/TipViewController.m"; sourceTree = "<group>"; };
+		90ABED1B192438B200D7E207 /* TipViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TipViewController.xib; path = "View Controllers/TipViewController.xib"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +114,7 @@
 			children = (
 				90ABECF91924386C00D7E207 /* AppDelegate.h */,
 				90ABECFA1924386C00D7E207 /* AppDelegate.m */,
+				90ABED1E192438BD00D7E207 /* View Controllers */,
 				90ABECFC1924386C00D7E207 /* Images.xcassets */,
 				90ABECF11924386C00D7E207 /* Supporting Files */,
 			);
@@ -142,6 +148,16 @@
 				90ABED0C1924386C00D7E207 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		90ABED1E192438BD00D7E207 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				90ABED19192438B200D7E207 /* TipViewController.h */,
+				90ABED1A192438B200D7E207 /* TipViewController.m */,
+				90ABED1B192438B200D7E207 /* TipViewController.xib */,
+			);
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,6 +235,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90ABED1D192438B200D7E207 /* TipViewController.xib in Resources */,
 				90ABECF51924386C00D7E207 /* InfoPlist.strings in Resources */,
 				90ABECFD1924386C00D7E207 /* Images.xcassets in Resources */,
 			);
@@ -240,6 +257,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				90ABECFB1924386C00D7E207 /* AppDelegate.m in Sources */,
+				90ABED1C192438B200D7E207 /* TipViewController.m in Sources */,
 				90ABECF71924386C00D7E207 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
