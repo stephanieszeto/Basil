@@ -7,6 +7,7 @@
 //
 
 #import "TipViewController.h"
+#import "SettingsViewController.h"
 
 @interface TipViewController ()
 
@@ -26,9 +27,21 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        self.title = @"Calculate Tip";
     }
     return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidChange:) name:UITextFieldTextDidChangeNotification object:self.subtotal];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewDidLoad
@@ -40,6 +53,9 @@
     UIColor *greenColor = [UIColor colorWithRed:22/255.0f green:160/255.0f blue:133/255.0f alpha:1.0f];
     UIColor *whiteColor = [UIColor whiteColor];
     self.view.backgroundColor = greenColor;
+    self.navigationController.navigationBar.barTintColor = greenColor;
+    self.navigationController.navigationBar.tintColor = whiteColor;
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
     self.subtotal.backgroundColor = [UIColor clearColor];
     self.subtotal.textColor = whiteColor;
     self.tipControl.tintColor = whiteColor;
@@ -67,6 +83,9 @@
     self.twoPersonTotal.text = zero;
     self.threePersonTotal.text = zero;
     self.fourPersonTotal.text = zero;
+    
+    // set up navigation items
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(onSettingsButton:)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -90,6 +109,10 @@
     [self updateValues];
 }
 
+- (void)textFieldDidChange:(id)sender {
+    [self updateValues];
+}
+
 - (void)updateValues {
     float subtotal = [self.subtotal.text floatValue];
     
@@ -105,6 +128,13 @@
     self.twoPersonTotal.text = [NSString stringWithFormat:@"$%0.2f", twoPersonTotal];
     self.threePersonTotal.text = [NSString stringWithFormat:@"$%0.2f", threePersonTotal];
     self.fourPersonTotal.text = [NSString stringWithFormat:@"$%0.2f", fourPersonTotal];
+}
+
+# pragma mark - Navigation methods
+
+- (void)onSettingsButton:(id)sender {
+    SettingsViewController *svc = [[SettingsViewController alloc] init];
+    [self.navigationController pushViewController:svc animated:NO];
 }
 
 @end

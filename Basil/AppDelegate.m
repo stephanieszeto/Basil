@@ -20,7 +20,7 @@
     application.statusBarStyle = UIStatusBarStyleLightContent;
     
     TipViewController *tvc = [[TipViewController alloc] init];
-    self.window.rootViewController = tvc;
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:tvc];
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
