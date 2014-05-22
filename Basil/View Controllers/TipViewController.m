@@ -8,6 +8,7 @@
 
 #import "TipViewController.h"
 #import "SettingsViewController.h"
+#import "CameraViewController.h"
 
 @interface TipViewController ()
 
@@ -86,6 +87,7 @@
     
     // set up navigation items
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(onSettingsButton:)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Camera" style:UIBarButtonItemStylePlain target:self action:@selector(onCameraButton:)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -135,6 +137,11 @@
 - (void)onSettingsButton:(id)sender {
     SettingsViewController *svc = [[SettingsViewController alloc] init];
     [self.navigationController pushViewController:svc animated:NO];
+}
+
+- (void)onCameraButton:(id)sender {
+    CameraViewController *cvc = [[CameraViewController alloc] init];
+    [self.navigationController pushViewController:cvc animated:NO];
 }
 
 @end
