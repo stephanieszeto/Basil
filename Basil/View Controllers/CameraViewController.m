@@ -29,6 +29,21 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:@"Device has no camera"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles: nil];
+        [alert show];
+        //self.tabBarController.selectedViewController = self.tabBarController.viewControllers[0];
+        self.tabBarController.selectedIndex = 0;
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -44,16 +59,6 @@
     
     // set up navigation items
     self.navigationController.navigationBarHidden = YES;
-    
-    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                        message:@"Device has no camera"
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles: nil];
-        [alert show];
-        [self.navigationController popViewControllerAnimated:YES];
-    } 
 }
 
 - (void)didReceiveMemoryWarning

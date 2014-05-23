@@ -10,6 +10,8 @@
 
 @interface SettingsViewController ()
 
+@property (weak, nonatomic) IBOutlet UISegmentedControl *defaultTipControl;
+
 @end
 
 @implementation SettingsViewController
@@ -26,7 +28,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+
+    // set up coloring
+    UIColor *greenColor = [UIColor colorWithRed:22/255.0f green:160/255.0f blue:133/255.0f alpha:1.0f];
+    //self.view.backgroundColor = greenColor;
+    self.defaultTipControl.tintColor = greenColor;
 }
 
 - (void)didReceiveMemoryWarning
