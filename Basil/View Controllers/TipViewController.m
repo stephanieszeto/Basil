@@ -28,7 +28,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = @"Calculate Tip";
+        self.title = @"Tip";
     }
     return self;
 }
@@ -54,9 +54,6 @@
     UIColor *greenColor = [UIColor colorWithRed:22/255.0f green:160/255.0f blue:133/255.0f alpha:1.0f];
     UIColor *whiteColor = [UIColor whiteColor];
     self.view.backgroundColor = greenColor;
-    self.navigationController.navigationBar.barTintColor = greenColor;
-    self.navigationController.navigationBar.tintColor = whiteColor;
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
     self.subtotal.backgroundColor = [UIColor clearColor];
     self.subtotal.textColor = whiteColor;
     self.tipControl.tintColor = whiteColor;
@@ -65,6 +62,13 @@
     self.twoPersonTotal.textColor = whiteColor;
     self.threePersonTotal.textColor = whiteColor;
     self.fourPersonTotal.textColor = whiteColor;
+    
+    self.navigationController.navigationBar.barTintColor = greenColor;
+    self.navigationController.navigationBar.tintColor = whiteColor;
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+
+    self.tabBarController.tabBar.tintColor = [UIColor whiteColor];
+    self.tabBarController.tabBar.barTintColor = greenColor;
     
     // set up subtotal
     self.subtotal.borderStyle = UITextBorderStyleNone;
@@ -86,8 +90,7 @@
     self.fourPersonTotal.text = zero;
     
     // set up navigation items
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(onSettingsButton:)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Camera" style:UIBarButtonItemStylePlain target:self action:@selector(onCameraButton:)];
+    self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)didReceiveMemoryWarning

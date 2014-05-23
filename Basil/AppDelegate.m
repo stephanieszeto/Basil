@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "TipViewController.h"
+#import "CameraViewController.h"
 
 @implementation AppDelegate
 
@@ -19,8 +20,16 @@
     application.statusBarHidden = NO;
     application.statusBarStyle = UIStatusBarStyleLightContent;
     
+    UITabBarController *tbc = [[UITabBarController alloc] init];
     TipViewController *tvc = [[TipViewController alloc] init];
-    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:tvc];
+    UINavigationController *tnc = [[UINavigationController alloc] initWithRootViewController:tvc];
+    
+    CameraViewController *cvc = [[CameraViewController alloc] init];
+    UINavigationController *cnc = [[UINavigationController alloc] initWithRootViewController:cvc];
+    
+    tbc.viewControllers = @[tnc, cnc];
+    
+    self.window.rootViewController = tbc;
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

@@ -24,7 +24,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        self.title = @"Receipt";
     }
     return self;
 }
@@ -36,8 +36,14 @@
     // set up views
     self.buttonBox.layer.cornerRadius = 20;
     self.buttonBox.layer.borderWidth = 1;
-    self.buttonBox.layer.borderColor = [[UIColor whiteColor] CGColor];
-    self.takePhotoButton.tintColor = [UIColor whiteColor];
+    
+    // set up coloring
+        UIColor *greenColor = [UIColor colorWithRed:22/255.0f green:160/255.0f blue:133/255.0f alpha:1.0f];
+    self.takePhotoButton.tintColor = greenColor;
+    self.buttonBox.layer.borderColor = [greenColor CGColor];
+    
+    // set up navigation items
+    self.navigationController.navigationBarHidden = YES;
     
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
@@ -47,9 +53,7 @@
                                               otherButtonTitles: nil];
         [alert show];
         [self.navigationController popViewControllerAnimated:YES];
-    } else {
-        [self onTakePhotoButton:self];
-    }
+    } 
 }
 
 - (void)didReceiveMemoryWarning
@@ -69,9 +73,16 @@
 # pragma mark - Image picker methods
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    // button settings
+    [self.takePhotoButton setTitle:@"Retake Photo" forState:UIControlStateNormal];
+    
     UIImage *img = info[UIImagePickerControllerOriginalImage];
     self.imageView.image = img;
     self.imageView.contentMode = UIViewContentModeScaleToFill;
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
