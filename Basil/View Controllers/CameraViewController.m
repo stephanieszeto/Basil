@@ -11,6 +11,8 @@
 @interface CameraViewController ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIView *buttonBox;
+@property (weak, nonatomic) IBOutlet UIButton *takePhotoButton;
 
 - (IBAction)onTakePhotoButton:(id)sender;
 
@@ -30,15 +32,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
+    // set up views
+    self.buttonBox.layer.cornerRadius = 20;
+    self.buttonBox.layer.borderWidth = 1;
+    self.buttonBox.layer.borderColor = [[UIColor whiteColor] CGColor];
+    self.takePhotoButton.tintColor = [UIColor whiteColor];
+    
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                              message:@"Device has no camera"
-                                                             delegate:nil
-                                                    cancelButtonTitle:@"OK"
-                                                    otherButtonTitles: nil];
+                                                        message:@"Device has no camera"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles: nil];
         [alert show];
         [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        [self onTakePhotoButton:self];
     }
 }
 
@@ -51,7 +61,6 @@
 - (IBAction)onTakePhotoButton:(id)sender {
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
-    picker.allowsEditing = YES;
     picker.sourceType = UIImagePickerControllerCameraDeviceFront;
     
     [self.navigationController presentViewController:picker animated:YES completion:NULL];
@@ -60,8 +69,9 @@
 # pragma mark - Image picker methods
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    UIImage *img = info[UIImagePickerControllerEditedImage];
+    UIImage *img = info[UIImagePickerControllerOriginalImage];
     self.imageView.image = img;
+    self.imageView.contentMode = UIViewContentModeScaleToFill;
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
