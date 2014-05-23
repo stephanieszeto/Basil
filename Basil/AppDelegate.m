@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "TipViewController.h"
 #import "CameraViewController.h"
+#import "SettingsViewController.h"
 
 @implementation AppDelegate
 
@@ -27,7 +28,9 @@
     CameraViewController *cvc = [[CameraViewController alloc] init];
     UINavigationController *cnc = [[UINavigationController alloc] initWithRootViewController:cvc];
     
-    tbc.viewControllers = @[tnc, cnc];
+    SettingsViewController *svc = [[SettingsViewController alloc] init];
+    
+    tbc.viewControllers = @[tnc, cnc, svc];
     
     self.window.rootViewController = tbc;
     

@@ -7,8 +7,6 @@
 //
 
 #import "TipViewController.h"
-#import "SettingsViewController.h"
-#import "CameraViewController.h"
 
 @interface TipViewController ()
 
@@ -133,18 +131,6 @@
     self.twoPersonTotal.text = [NSString stringWithFormat:@"$%0.2f", twoPersonTotal];
     self.threePersonTotal.text = [NSString stringWithFormat:@"$%0.2f", threePersonTotal];
     self.fourPersonTotal.text = [NSString stringWithFormat:@"$%0.2f", fourPersonTotal];
-}
-
-# pragma mark - Navigation methods
-
-- (void)onSettingsButton:(id)sender {
-    SettingsViewController *svc = [[SettingsViewController alloc] init];
-    [self.navigationController pushViewController:svc animated:NO];
-}
-
-- (void)onCameraButton:(id)sender {
-    CameraViewController *cvc = [[CameraViewController alloc] init];
-    [self.navigationController pushViewController:cvc animated:NO];
 }
 
 @end

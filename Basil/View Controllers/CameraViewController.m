@@ -78,7 +78,7 @@
     
     UIImage *img = info[UIImagePickerControllerOriginalImage];
     self.imageView.image = img;
-    self.imageView.contentMode = UIViewContentModeScaleToFill;
+    self.imageView.contentMode = UIViewContentModeScaleAspectFill;
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
