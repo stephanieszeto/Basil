@@ -34,6 +34,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    // set default tip percentage
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    self.tipControl.selectedSegmentIndex = [defaults integerForKey:@"defaultTipIndex"];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidChange:) name:UITextFieldTextDidChangeNotification object:self.subtotal];
 }
 
