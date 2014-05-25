@@ -74,11 +74,8 @@
     self.threePersonTotal.textColor = whiteColor;
     self.fourPersonTotal.textColor = whiteColor;
     
-    self.navigationController.navigationBar.barTintColor = greenColor;
-    self.navigationController.navigationBar.tintColor = whiteColor;
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
-
-    self.tabBarController.tabBar.tintColor = [UIColor whiteColor];
+    UIColor *lightGreenColor = [UIColor colorWithRed:1/255.0f green:171/255.0f blue:156/255.0f alpha:1.0f];
+    self.tabBarController.tabBar.tintColor = whiteColor;
     self.tabBarController.tabBar.barTintColor = greenColor;
     
     // set up subtotal

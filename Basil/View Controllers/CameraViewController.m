@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIView *buttonBox;
 @property (weak, nonatomic) IBOutlet UIButton *takePhotoButton;
+@property (nonatomic, assign) BOOL photoTaken;
 
 - (IBAction)onTakePhotoButton:(id)sender;
 
@@ -32,9 +33,15 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    // clear image every time view controller appears
+    if (!self.photoTaken) {
+        self.imageView.image = nil;
+        [self.takePhotoButton setTitle:@"Take Photo" forState:UIControlStateNormal];
+    }
+    
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                        message:@"Device has no camera"
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry!"
+                                                        message:@"Your device doesn't have a camera."
                                                        delegate:nil
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles: nil];
@@ -44,8 +51,12 @@
     }
 }
 
-- (void)viewDidLoad
-{
+- (void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    self.photoTaken = NO;
+}
+
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     // set up views
@@ -78,6 +89,8 @@
 # pragma mark - Image picker methods
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    self.photoTaken = YES;
+    
     // button settings
     [self.takePhotoButton setTitle:@"Retake Photo" forState:UIControlStateNormal];
     
