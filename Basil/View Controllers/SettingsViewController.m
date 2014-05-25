@@ -28,6 +28,29 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    // update default tip control, custom percentage fields with values if they already exist
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"tipPercentInts"]) {
+        NSArray *tipPercentInts = [defaults objectForKey:@"tipPercentInts"];
+        [self.defaultTipControl setTitle:[NSString stringWithFormat:@"%@%%", tipPercentInts[0]] forSegmentAtIndex:0];
+        [self.defaultTipControl setTitle:[NSString stringWithFormat:@"%@%%", tipPercentInts[1]] forSegmentAtIndex:1];
+        [self.defaultTipControl setTitle:[NSString stringWithFormat:@"%@%%", tipPercentInts[2]] forSegmentAtIndex:2];
+        
+        self.customTip1.text = [tipPercentInts[0] stringValue];
+        self.customTip2.text = [tipPercentInts[1] stringValue];
+        self.customTip3.text = [tipPercentInts[2] stringValue];
+    }
+    
+    // update default tip index if it already exists
+    NSInteger defaultIndex = [defaults integerForKey:@"defaultTipIndex"];
+    if (defaultIndex) {
+        self.defaultTipControl.selectedSegmentIndex = defaultIndex;
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

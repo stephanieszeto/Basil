@@ -30,11 +30,13 @@
     UINavigationController *cnc = [[UINavigationController alloc] initWithRootViewController:cvc];
     SettingsViewController *svc = [[SettingsViewController alloc] init];
     
-    // set default tip percentages
+    // set default tip percentages if they don't exist
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:@[@(0.15), @(0.18), @(0.2)] forKey:@"tipPercentFloats"];
-    [defaults setObject:@[@(15), @(18), @(20)] forKey:@"tipPercentInts"];
-    [defaults synchronize];
+    if (![defaults objectForKey:@"tipPercentFloats"]) {
+        [defaults setObject:@[@(0.15), @(0.18), @(0.2)] forKey:@"tipPercentFloats"];
+        [defaults setObject:@[@(15), @(18), @(20)] forKey:@"tipPercentInts"];
+        [defaults synchronize];
+    }
     
     tbc.viewControllers = @[tnc, cnc, svc];
     self.window.rootViewController = tbc;
