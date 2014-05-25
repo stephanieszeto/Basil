@@ -65,10 +65,43 @@
 - (void)onDefaultControlTap:(id)sender {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setInteger:self.defaultTipControl.selectedSegmentIndex forKey:@"defaultTipIndex"];
+    [defaults synchronize];
 }
 
 - (void)onViewTap:(id)sender {
     [self.view endEditing:YES];
+    
+    // first, convert to integer
+    NSInteger customTip1 = [self.customTip1.text integerValue];
+    NSInteger customTip2 = [self.customTip2.text integerValue];
+    NSInteger customTip3 = [self.customTip3.text integerValue];
+
+    // validate values
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Whoa there!"
+                                                    message:@"Percentages must be less than 100."
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles: nil];
+    if (customTip1 > 100 || customTip2 > 100 || customTip3 > 100) {
+        [alert show];
+    } else {
+        // update tip control array
+        float customPercentage1 = customTip1 / 100.0f;
+        float customPercentage2 = customTip2 / 100.0f;
+        float customPercentage3 = customTip3 / 100.0f;
+        NSArray *tipPercentFloats = @[@(customPercentage1), @(customPercentage2), @(customPercentage3)];
+        NSArray *tipPercentInts = @[@(customTip1), @(customTip2), @(customTip3)];
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:tipPercentFloats forKey:@"tipPercentFloats"];
+        [defaults setObject:tipPercentInts forKey:@"tipPercentInts"];
+        [defaults synchronize];
+        
+        // update values in defaultTipControl
+        [self.defaultTipControl setTitle:[NSString stringWithFormat:@"%d%%", customTip1] forSegmentAtIndex:0];
+        [self.defaultTipControl setTitle:[NSString stringWithFormat:@"%d%%", customTip2] forSegmentAtIndex:1];
+        [self.defaultTipControl setTitle:[NSString stringWithFormat:@"%d%%", customTip3] forSegmentAtIndex:2];
+    }
 }
 
 @end

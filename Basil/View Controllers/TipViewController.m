@@ -38,6 +38,15 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.tipControl.selectedSegmentIndex = [defaults integerForKey:@"defaultTipIndex"];
     
+    // set tip percentages in tip control
+    NSArray *tipPercentInts = [defaults objectForKey:@"tipPercentInts"];
+    [self.tipControl setTitle:[NSString stringWithFormat:@"%@%%", tipPercentInts[0]] forSegmentAtIndex:0];
+    [self.tipControl setTitle:[NSString stringWithFormat:@"%@%%", tipPercentInts[1]] forSegmentAtIndex:1];
+    [self.tipControl setTitle:[NSString stringWithFormat:@"%@%%", tipPercentInts[2]] forSegmentAtIndex:2];
+    
+    // recalculate tip
+    [self updateValues];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidChange:) name:UITextFieldTextDidChangeNotification object:self.subtotal];
 }
 
@@ -123,8 +132,9 @@
 - (void)updateValues {
     float subtotal = [self.subtotal.text floatValue];
     
-    NSArray *tipValues = @[@(0.15), @(0.18), @(0.2)];
-    float tip = subtotal * [tipValues[self.tipControl.selectedSegmentIndex] floatValue];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSArray *tipPercentages = [defaults objectForKey:@"tipPercentFloats"];
+    float tip = subtotal * [tipPercentages[self.tipControl.selectedSegmentIndex] floatValue];
     float onePersonTotal = tip + subtotal;
     float twoPersonTotal = (onePersonTotal / 2);
     float threePersonTotal = (onePersonTotal / 3);

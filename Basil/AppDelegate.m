@@ -22,16 +22,21 @@
     application.statusBarStyle = UIStatusBarStyleLightContent;
     
     UITabBarController *tbc = [[UITabBarController alloc] init];
+    
+    // set up view controllers
     TipViewController *tvc = [[TipViewController alloc] init];
     UINavigationController *tnc = [[UINavigationController alloc] initWithRootViewController:tvc];
-    
     CameraViewController *cvc = [[CameraViewController alloc] init];
     UINavigationController *cnc = [[UINavigationController alloc] initWithRootViewController:cvc];
-    
     SettingsViewController *svc = [[SettingsViewController alloc] init];
     
-    tbc.viewControllers = @[tnc, cnc, svc];
+    // set default tip percentages
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:@[@(0.15), @(0.18), @(0.2)] forKey:@"tipPercentFloats"];
+    [defaults setObject:@[@(15), @(18), @(20)] forKey:@"tipPercentInts"];
+    [defaults synchronize];
     
+    tbc.viewControllers = @[tnc, cnc, svc];
     self.window.rootViewController = tbc;
     
     self.window.backgroundColor = [UIColor whiteColor];
