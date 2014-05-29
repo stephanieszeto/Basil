@@ -18,6 +18,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *threePersonTotal;
 @property (weak, nonatomic) IBOutlet UILabel *fourPersonTotal;
 
+@property (weak, nonatomic) IBOutlet UIImageView *onePersonIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *twoPersonIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *threePersonIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *fourPersonIcon;
+
 @end
 
 @implementation TipViewController
@@ -96,6 +101,23 @@
     self.twoPersonTotal.text = zero;
     self.threePersonTotal.text = zero;
     self.fourPersonTotal.text = zero;
+    
+    // set up scroll view
+    CGRect fullScreenRect = [[UIScreen mainScreen] applicationFrame];
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:fullScreenRect];
+    scrollView.contentSize=CGSizeMake(320,758);
+    [scrollView addSubview:self.subtotal];
+    [scrollView addSubview:self.tipControl];
+    [scrollView addSubview:self.tip];
+    [scrollView addSubview:self.onePersonTotal];
+    [scrollView addSubview:self.twoPersonTotal];
+    [scrollView addSubview:self.threePersonTotal];
+    [scrollView addSubview:self.fourPersonTotal];
+    [scrollView addSubview:self.onePersonIcon];
+    [scrollView addSubview:self.twoPersonIcon];
+    [scrollView addSubview:self.threePersonIcon];
+    [scrollView addSubview:self.fourPersonIcon];
+    [self.view addSubview:scrollView];
     
     // set up navigation items
     self.navigationController.navigationBarHidden = YES;

@@ -6,12 +6,16 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TipViewController">
             <connections>
+                <outlet property="fourPersonIcon" destination="KOR-Gq-jSg" id="NL7-lK-gpT"/>
                 <outlet property="fourPersonTotal" destination="V2M-zJ-bdY" id="sPF-cE-CaM"/>
+                <outlet property="onePersonIcon" destination="fLv-gf-xOu" id="03N-f7-gqX"/>
                 <outlet property="onePersonTotal" destination="Ei5-mE-n7m" id="QV7-dV-Bz4"/>
                 <outlet property="subtotal" destination="fwf-9W-i7t" id="Sa7-CE-XQY"/>
+                <outlet property="threePersonIcon" destination="KOA-cy-SeV" id="zrs-P8-wdo"/>
                 <outlet property="threePersonTotal" destination="dM8-an-AIw" id="PlW-yo-dtp"/>
                 <outlet property="tip" destination="tDj-FY-IcJ" id="Qie-IU-Gwl"/>
                 <outlet property="tipControl" destination="T0v-ha-fEo" id="0Sx-MY-177"/>
+                <outlet property="twoPersonIcon" destination="6d8-In-LrX" id="yob-Ft-c7S"/>
                 <outlet property="twoPersonTotal" destination="RxB-Mf-x4a" id="ozq-5F-V55"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
