@@ -101,6 +101,24 @@
     self.navigationController.navigationBarHidden = YES;
 }
 
+//- (void)loadView {
+//    // set up scroll view
+//    CGRect fullScreenRect = [[UIScreen mainScreen] applicationFrame];
+//    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:fullScreenRect];
+//    scrollView.contentSize=CGSizeMake(320,758);
+//    
+//    // add components to view
+//    [scrollView addSubview:self.subtotal];
+//    [scrollView addSubview:self.tipControl];
+//    [scrollView addSubview:self.tip];
+//    [scrollView addSubview:self.onePersonTotal];
+//    [scrollView addSubview:self.twoPersonTotal];
+//    [scrollView addSubview:self.threePersonTotal];
+//    [scrollView addSubview:self.fourPersonTotal];
+//    
+//    self.view = scrollView;
+//}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
