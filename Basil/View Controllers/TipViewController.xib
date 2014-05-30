@@ -7,15 +7,19 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TipViewController">
             <connections>
                 <outlet property="fourPersonIcon" destination="KOR-Gq-jSg" id="NL7-lK-gpT"/>
+                <outlet property="fourPersonLabel" destination="YbB-u6-pU1" id="n50-9M-XNd"/>
                 <outlet property="fourPersonTotal" destination="V2M-zJ-bdY" id="sPF-cE-CaM"/>
                 <outlet property="onePersonIcon" destination="fLv-gf-xOu" id="03N-f7-gqX"/>
-                <outlet property="onePersonTotal" destination="Ei5-mE-n7m" id="QV7-dV-Bz4"/>
+                <outlet property="onePersonLabel" destination="zb8-Y9-esm" id="eqN-Ew-IsI"/>
+                <outlet property="onePersonTotal" destination="Ei5-mE-n7m" id="10O-Kt-PIc"/>
                 <outlet property="subtotal" destination="fwf-9W-i7t" id="Sa7-CE-XQY"/>
                 <outlet property="threePersonIcon" destination="KOA-cy-SeV" id="zrs-P8-wdo"/>
+                <outlet property="threePersonLabel" destination="N4g-Tf-fT6" id="PTn-0C-m7O"/>
                 <outlet property="threePersonTotal" destination="dM8-an-AIw" id="PlW-yo-dtp"/>
                 <outlet property="tip" destination="tDj-FY-IcJ" id="Qie-IU-Gwl"/>
                 <outlet property="tipControl" destination="T0v-ha-fEo" id="0Sx-MY-177"/>
                 <outlet property="twoPersonIcon" destination="6d8-In-LrX" id="yob-Ft-c7S"/>
+                <outlet property="twoPersonLabel" destination="7Wc-3D-7m7" id="OHf-UP-bsN"/>
                 <outlet property="twoPersonTotal" destination="RxB-Mf-x4a" id="ozq-5F-V55"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -44,6 +48,33 @@
                     <rect key="frame" x="146" y="203" width="156" height="23"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zb8-Y9-esm">
+                    <rect key="frame" x="4" y="262" width="20" height="27"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Wc-3D-7m7">
+                    <rect key="frame" x="4" y="336" width="20" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N4g-Tf-fT6">
+                    <rect key="frame" x="4" y="404" width="20" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="4" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YbB-u6-pU1">
+                    <rect key="frame" x="4" y="466" width="20" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>

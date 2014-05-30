@@ -22,6 +22,10 @@
 @property (weak, nonatomic) IBOutlet UIImageView *twoPersonIcon;
 @property (weak, nonatomic) IBOutlet UIImageView *threePersonIcon;
 @property (weak, nonatomic) IBOutlet UIImageView *fourPersonIcon;
+@property (weak, nonatomic) IBOutlet UILabel *onePersonLabel;
+@property (weak, nonatomic) IBOutlet UILabel *twoPersonLabel;
+@property (weak, nonatomic) IBOutlet UILabel *threePersonLabel;
+@property (weak, nonatomic) IBOutlet UILabel *fourPersonLabel;
 
 @end
 
@@ -78,6 +82,10 @@
     self.twoPersonTotal.textColor = whiteColor;
     self.threePersonTotal.textColor = whiteColor;
     self.fourPersonTotal.textColor = whiteColor;
+    self.onePersonLabel.textColor = whiteColor;
+    self.twoPersonLabel.textColor = whiteColor;
+    self.threePersonLabel.textColor = whiteColor;
+    self.fourPersonLabel.textColor = whiteColor;
     
     UIColor *lightGreenColor = [UIColor colorWithRed:1/255.0f green:171/255.0f blue:156/255.0f alpha:1.0f];
     self.tabBarController.tabBar.tintColor = whiteColor;
@@ -117,6 +125,10 @@
     [scrollView addSubview:self.twoPersonIcon];
     [scrollView addSubview:self.threePersonIcon];
     [scrollView addSubview:self.fourPersonIcon];
+    [scrollView addSubview:self.onePersonLabel];
+    [scrollView addSubview:self.twoPersonLabel];
+    [scrollView addSubview:self.threePersonLabel];
+    [scrollView addSubview:self.fourPersonLabel];
     [self.view addSubview:scrollView];
     
     // set up navigation items
