@@ -10,11 +10,11 @@
 #import "TipViewController.h"
 #import "CameraViewController.h"
 #import "SettingsViewController.h"
+#import "ReceiptsViewController.h"
 
 @implementation AppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     // coloring
@@ -28,6 +28,8 @@
     UINavigationController *tnc = [[UINavigationController alloc] initWithRootViewController:tvc];
     CameraViewController *cvc = [[CameraViewController alloc] init];
     UINavigationController *cnc = [[UINavigationController alloc] initWithRootViewController:cvc];
+    ReceiptsViewController *rvc = [[ReceiptsViewController alloc] init];
+    UINavigationController *rnc = [[UINavigationController alloc] initWithRootViewController:rvc];
     SettingsViewController *svc = [[SettingsViewController alloc] init];
     
     // set default tip percentages if they don't exist
@@ -38,7 +40,7 @@
         [defaults synchronize];
     }
     
-    tbc.viewControllers = @[tnc, cnc, svc];
+    tbc.viewControllers = @[tnc, cnc, rnc, svc];
     self.window.rootViewController = tbc;
     
     self.window.backgroundColor = [UIColor whiteColor];

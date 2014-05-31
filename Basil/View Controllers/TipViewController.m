@@ -149,6 +149,14 @@
 //    [scrollView addSubview:self.twoPersonTotal];
 //    [scrollView addSubview:self.threePersonTotal];
 //    [scrollView addSubview:self.fourPersonTotal];
+//    [scrollView addSubview:self.onePersonIcon];
+//    [scrollView addSubview:self.twoPersonIcon];
+//    [scrollView addSubview:self.threePersonIcon];
+//    [scrollView addSubview:self.fourPersonIcon];
+//    [scrollView addSubview:self.onePersonLabel];
+//    [scrollView addSubview:self.twoPersonLabel];
+//    [scrollView addSubview:self.threePersonLabel];
+//    [scrollView addSubview:self.fourPersonLabel];
 //    
 //    self.view = scrollView;
 //}

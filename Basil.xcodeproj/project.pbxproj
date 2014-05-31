@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		90894997192DC51100B6935A /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90894995192DC51100B6935A /* CameraViewController.m */; };
 		90894998192DC51100B6935A /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90894996192DC51100B6935A /* CameraViewController.xib */; };
+		90A8CC3C1939901900CB9FD7 /* ReceiptsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A8CC3A1939901900CB9FD7 /* ReceiptsViewController.m */; };
+		90A8CC3D1939901900CB9FD7 /* ReceiptsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90A8CC3B1939901900CB9FD7 /* ReceiptsViewController.xib */; };
 		90ABECEB1924386C00D7E207 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90ABECEA1924386C00D7E207 /* Foundation.framework */; };
 		90ABECED1924386C00D7E207 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90ABECEC1924386C00D7E207 /* CoreGraphics.framework */; };
 		90ABECEF1924386C00D7E207 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90ABECEE1924386C00D7E207 /* UIKit.framework */; };
@@ -41,6 +43,9 @@
 		90894994192DC51100B6935A /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CameraViewController.h; path = "View Controllers/CameraViewController.h"; sourceTree = "<group>"; };
 		90894995192DC51100B6935A /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CameraViewController.m; path = "View Controllers/CameraViewController.m"; sourceTree = "<group>"; };
 		90894996192DC51100B6935A /* CameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CameraViewController.xib; path = "View Controllers/CameraViewController.xib"; sourceTree = "<group>"; };
+		90A8CC391939901900CB9FD7 /* ReceiptsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReceiptsViewController.h; path = "View Controllers/ReceiptsViewController.h"; sourceTree = "<group>"; };
+		90A8CC3A1939901900CB9FD7 /* ReceiptsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReceiptsViewController.m; path = "View Controllers/ReceiptsViewController.m"; sourceTree = "<group>"; };
+		90A8CC3B1939901900CB9FD7 /* ReceiptsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ReceiptsViewController.xib; path = "View Controllers/ReceiptsViewController.xib"; sourceTree = "<group>"; };
 		90ABECE71924386C00D7E207 /* Basil.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Basil.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90ABECEA1924386C00D7E207 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		90ABECEC1924386C00D7E207 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -166,6 +171,9 @@
 				90ABED19192438B200D7E207 /* TipViewController.h */,
 				90ABED1A192438B200D7E207 /* TipViewController.m */,
 				90ABED1B192438B200D7E207 /* TipViewController.xib */,
+				90A8CC391939901900CB9FD7 /* ReceiptsViewController.h */,
+				90A8CC3A1939901900CB9FD7 /* ReceiptsViewController.m */,
+				90A8CC3B1939901900CB9FD7 /* ReceiptsViewController.xib */,
 				90ABED1F1925D52000D7E207 /* SettingsViewController.h */,
 				90ABED201925D52000D7E207 /* SettingsViewController.m */,
 				90ABED211925D52000D7E207 /* SettingsViewController.xib */,
@@ -254,6 +262,7 @@
 				90ABED1D192438B200D7E207 /* TipViewController.xib in Resources */,
 				90ABECF51924386C00D7E207 /* InfoPlist.strings in Resources */,
 				90ABECFD1924386C00D7E207 /* Images.xcassets in Resources */,
+				90A8CC3D1939901900CB9FD7 /* ReceiptsViewController.xib in Resources */,
 				90ABED231925D52000D7E207 /* SettingsViewController.xib in Resources */,
 				90894998192DC51100B6935A /* CameraViewController.xib in Resources */,
 			);
@@ -275,6 +284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				90894997192DC51100B6935A /* CameraViewController.m in Sources */,
+				90A8CC3C1939901900CB9FD7 /* ReceiptsViewController.m in Sources */,
 				90ABECFB1924386C00D7E207 /* AppDelegate.m in Sources */,
 				90ABED1C192438B200D7E207 /* TipViewController.m in Sources */,
 				90ABECF71924386C00D7E207 /* main.m in Sources */,
