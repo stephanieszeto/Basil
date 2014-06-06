@@ -94,9 +94,14 @@
     // button settings
     [self.takePhotoButton setTitle:@"Retake Photo" forState:UIControlStateNormal];
     
+    // show picture
     UIImage *img = info[UIImagePickerControllerOriginalImage];
     self.imageView.image = img;
     self.imageView.contentMode = UIViewContentModeScaleAspectFill;
+    
+    // save picture in camera roll
+    UIImageWriteToSavedPhotosAlbum(img, nil, nil, nil);
+    
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
