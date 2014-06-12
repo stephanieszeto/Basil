@@ -14,18 +14,13 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *tipControl;
 @property (weak, nonatomic) IBOutlet UILabel *tip;
 @property (weak, nonatomic) IBOutlet UILabel *onePersonTotal;
-@property (weak, nonatomic) IBOutlet UILabel *twoPersonTotal;
-@property (weak, nonatomic) IBOutlet UILabel *threePersonTotal;
-@property (weak, nonatomic) IBOutlet UILabel *fourPersonTotal;
+@property (weak, nonatomic) IBOutlet UILabel *multiplePersonTotal;
 
-@property (weak, nonatomic) IBOutlet UIImageView *onePersonIcon;
-@property (weak, nonatomic) IBOutlet UIImageView *twoPersonIcon;
-@property (weak, nonatomic) IBOutlet UIImageView *threePersonIcon;
-@property (weak, nonatomic) IBOutlet UIImageView *fourPersonIcon;
 @property (weak, nonatomic) IBOutlet UILabel *onePersonLabel;
-@property (weak, nonatomic) IBOutlet UILabel *twoPersonLabel;
-@property (weak, nonatomic) IBOutlet UILabel *threePersonLabel;
-@property (weak, nonatomic) IBOutlet UILabel *fourPersonLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *onePersonIcon;
+@property (weak, nonatomic) IBOutlet UITextField *multiplePerson;
+@property (weak, nonatomic) IBOutlet UILabel *multiplePersonDivider;
+@property (weak, nonatomic) IBOutlet UIImageView *multiplePersonIcon;
 
 @end
 
@@ -79,13 +74,11 @@
     self.tipControl.tintColor = whiteColor;
     self.tip.textColor = whiteColor;
     self.onePersonTotal.textColor = whiteColor;
-    self.twoPersonTotal.textColor = whiteColor;
-    self.threePersonTotal.textColor = whiteColor;
-    self.fourPersonTotal.textColor = whiteColor;
+    self.multiplePersonTotal.textColor = whiteColor;
     self.onePersonLabel.textColor = whiteColor;
-    self.twoPersonLabel.textColor = whiteColor;
-    self.threePersonLabel.textColor = whiteColor;
-    self.fourPersonLabel.textColor = whiteColor;
+    self.multiplePersonDivider.textColor = whiteColor;
+    self.multiplePerson.layer.borderColor = [whiteColor CGColor];
+    self.multiplePerson.layer.borderWidth = 1.0f;
     
     UIColor *lightGreenColor = [UIColor colorWithRed:1/255.0f green:171/255.0f blue:156/255.0f alpha:1.0f];
     self.tabBarController.tabBar.tintColor = whiteColor;
@@ -106,9 +99,7 @@
     NSString *zero = @"$0.00";
     self.tip.text = zero;
     self.onePersonTotal.text = zero;
-    self.twoPersonTotal.text = zero;
-    self.threePersonTotal.text = zero;
-    self.fourPersonTotal.text = zero;
+    self.multiplePersonTotal.text = zero;
     
     // set up scroll view
     CGRect fullScreenRect = [[UIScreen mainScreen] applicationFrame];
@@ -118,17 +109,12 @@
     [scrollView addSubview:self.tipControl];
     [scrollView addSubview:self.tip];
     [scrollView addSubview:self.onePersonTotal];
-    [scrollView addSubview:self.twoPersonTotal];
-    [scrollView addSubview:self.threePersonTotal];
-    [scrollView addSubview:self.fourPersonTotal];
-    [scrollView addSubview:self.onePersonIcon];
-    [scrollView addSubview:self.twoPersonIcon];
-    [scrollView addSubview:self.threePersonIcon];
-    [scrollView addSubview:self.fourPersonIcon];
+    [scrollView addSubview:self.multiplePersonTotal];
     [scrollView addSubview:self.onePersonLabel];
-    [scrollView addSubview:self.twoPersonLabel];
-    [scrollView addSubview:self.threePersonLabel];
-    [scrollView addSubview:self.fourPersonLabel];
+    [scrollView addSubview:self.onePersonIcon];
+    [scrollView addSubview:self.multiplePerson];
+    [scrollView addSubview:self.multiplePersonDivider];
+    [scrollView addSubview:self.multiplePersonIcon];
     [self.view addSubview:scrollView];
     
     // set up navigation items
@@ -193,15 +179,18 @@
     NSArray *tipPercentages = [defaults objectForKey:@"tipPercentFloats"];
     float tip = subtotal * [tipPercentages[self.tipControl.selectedSegmentIndex] floatValue];
     float onePersonTotal = tip + subtotal;
-    float twoPersonTotal = (onePersonTotal / 2);
-    float threePersonTotal = (onePersonTotal / 3);
-    float fourPersonTotal = (onePersonTotal / 4);
+    
+    NSInteger multiplePerson = [self.multiplePerson.text integerValue];
+    float multiplePersonTotal;
+    if (multiplePerson) {
+        multiplePersonTotal = (onePersonTotal / multiplePerson);
+    } else {
+        multiplePersonTotal = onePersonTotal;
+    }
     
     self.tip.text = [NSString stringWithFormat:@"$%0.2f", tip];
     self.onePersonTotal.text = [NSString stringWithFormat:@"$%0.2f", onePersonTotal];
-    self.twoPersonTotal.text = [NSString stringWithFormat:@"$%0.2f", twoPersonTotal];
-    self.threePersonTotal.text = [NSString stringWithFormat:@"$%0.2f", threePersonTotal];
-    self.fourPersonTotal.text = [NSString stringWithFormat:@"$%0.2f", fourPersonTotal];
+    self.multiplePersonTotal.text = [NSString stringWithFormat:@"$%0.2f", multiplePersonTotal];
 }
 
 @end
