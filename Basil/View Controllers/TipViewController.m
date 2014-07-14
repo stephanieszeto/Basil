@@ -16,8 +16,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *onePersonTotal;
 @property (weak, nonatomic) IBOutlet UILabel *multiplePersonTotal;
 
-@property (weak, nonatomic) IBOutlet UILabel *onePersonLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *onePersonIcon;
 @property (weak, nonatomic) IBOutlet UITextField *multiplePerson;
 @property (weak, nonatomic) IBOutlet UILabel *multiplePersonDivider;
 @property (weak, nonatomic) IBOutlet UIImageView *multiplePersonIcon;
@@ -64,7 +62,7 @@
 {
     [super viewDidLoad];
 
-    // coloring
+    // coloring - main color is #16A085
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     UIColor *greenColor = [UIColor colorWithRed:22/255.0f green:160/255.0f blue:133/255.0f alpha:1.0f];
     UIColor *whiteColor = [UIColor whiteColor];
@@ -75,7 +73,6 @@
     self.tip.textColor = whiteColor;
     self.onePersonTotal.textColor = whiteColor;
     self.multiplePersonTotal.textColor = whiteColor;
-    self.onePersonLabel.textColor = whiteColor;
     self.multiplePersonDivider.textColor = whiteColor;
     self.multiplePerson.layer.borderColor = [whiteColor CGColor];
     self.multiplePerson.layer.borderWidth = 1.0f;
@@ -102,20 +99,18 @@
     self.multiplePersonTotal.text = zero;
     
     // set up scroll view
-    CGRect fullScreenRect = [[UIScreen mainScreen] applicationFrame];
-    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:fullScreenRect];
-    scrollView.contentSize=CGSizeMake(320,758);
-    [scrollView addSubview:self.subtotal];
-    [scrollView addSubview:self.tipControl];
-    [scrollView addSubview:self.tip];
-    [scrollView addSubview:self.onePersonTotal];
-    [scrollView addSubview:self.multiplePersonTotal];
-    [scrollView addSubview:self.onePersonLabel];
-    [scrollView addSubview:self.onePersonIcon];
-    [scrollView addSubview:self.multiplePerson];
-    [scrollView addSubview:self.multiplePersonDivider];
-    [scrollView addSubview:self.multiplePersonIcon];
-    [self.view addSubview:scrollView];
+//    CGRect fullScreenRect = [[UIScreen mainScreen] applicationFrame];
+//    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:fullScreenRect];
+//    scrollView.contentSize=CGSizeMake(320,758);
+//    [scrollView addSubview:self.subtotal];
+//    [scrollView addSubview:self.tipControl];
+//    [scrollView addSubview:self.tip];
+//    [scrollView addSubview:self.onePersonTotal];
+//    [scrollView addSubview:self.multiplePersonTotal];
+//    [scrollView addSubview:self.multiplePerson];
+//    [scrollView addSubview:self.multiplePersonDivider];
+//    [scrollView addSubview:self.multiplePersonIcon];
+//    [self.view addSubview:scrollView];
     
     // set up navigation items
     self.navigationController.navigationBarHidden = YES;

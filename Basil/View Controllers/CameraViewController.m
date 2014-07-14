@@ -64,7 +64,7 @@
     self.buttonBox.layer.borderWidth = 1;
     
     // set up coloring
-        UIColor *greenColor = [UIColor colorWithRed:22/255.0f green:160/255.0f blue:133/255.0f alpha:1.0f];
+    UIColor *greenColor = [UIColor colorWithRed:22/255.0f green:160/255.0f blue:133/255.0f alpha:1.0f];
     self.takePhotoButton.tintColor = greenColor;
     self.buttonBox.layer.borderColor = [greenColor CGColor];
     
