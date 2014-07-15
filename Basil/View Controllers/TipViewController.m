@@ -15,10 +15,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *tip;
 @property (weak, nonatomic) IBOutlet UILabel *onePersonTotal;
 @property (weak, nonatomic) IBOutlet UILabel *multiplePersonTotal;
-
 @property (weak, nonatomic) IBOutlet UITextField *multiplePerson;
-@property (weak, nonatomic) IBOutlet UILabel *multiplePersonDivider;
-@property (weak, nonatomic) IBOutlet UIImageView *multiplePersonIcon;
+
+@property (weak, nonatomic) IBOutlet UILabel *subtotalLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tipLabel;
+@property (weak, nonatomic) IBOutlet UILabel *totalLabel;
+@property (weak, nonatomic) IBOutlet UILabel *perPersonLabel;
+@property (weak, nonatomic) IBOutlet UILabel *personLabel;
 
 @end
 
@@ -62,24 +65,26 @@
 {
     [super viewDidLoad];
 
-    // coloring - main color is #16A085
+    // set coloring - main color is #16A085
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     UIColor *greenColor = [UIColor colorWithRed:22/255.0f green:160/255.0f blue:133/255.0f alpha:1.0f];
     UIColor *whiteColor = [UIColor whiteColor];
     self.view.backgroundColor = greenColor;
     self.subtotal.backgroundColor = [UIColor clearColor];
+    self.tabBarController.tabBar.tintColor = whiteColor;
+    self.tabBarController.tabBar.barTintColor = greenColor;
+    
+    // set all text coloring white
     self.subtotal.textColor = whiteColor;
     self.tipControl.tintColor = whiteColor;
     self.tip.textColor = whiteColor;
     self.onePersonTotal.textColor = whiteColor;
     self.multiplePersonTotal.textColor = whiteColor;
-    self.multiplePersonDivider.textColor = whiteColor;
-    self.multiplePerson.layer.borderColor = [whiteColor CGColor];
-    self.multiplePerson.layer.borderWidth = 1.0f;
-    
-    UIColor *lightGreenColor = [UIColor colorWithRed:1/255.0f green:171/255.0f blue:156/255.0f alpha:1.0f];
-    self.tabBarController.tabBar.tintColor = whiteColor;
-    self.tabBarController.tabBar.barTintColor = greenColor;
+    self.subtotalLabel.textColor = whiteColor;
+    self.tipLabel.textColor = whiteColor;
+    self.totalLabel.textColor = whiteColor;
+    self.perPersonLabel.textColor = whiteColor;
+    self.personLabel.textColor = whiteColor;
     
     // set up subtotal
     self.subtotal.borderStyle = UITextBorderStyleNone;
@@ -99,18 +104,27 @@
     self.multiplePersonTotal.text = zero;
     
     // set up scroll view
-//    CGRect fullScreenRect = [[UIScreen mainScreen] applicationFrame];
-//    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:fullScreenRect];
-//    scrollView.contentSize=CGSizeMake(320,758);
-//    [scrollView addSubview:self.subtotal];
-//    [scrollView addSubview:self.tipControl];
-//    [scrollView addSubview:self.tip];
-//    [scrollView addSubview:self.onePersonTotal];
-//    [scrollView addSubview:self.multiplePersonTotal];
-//    [scrollView addSubview:self.multiplePerson];
-//    [scrollView addSubview:self.multiplePersonDivider];
-//    [scrollView addSubview:self.multiplePersonIcon];
-//    [self.view addSubview:scrollView];
+    CGRect fullScreenRect = [[UIScreen mainScreen] applicationFrame];
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:fullScreenRect];
+    scrollView.contentSize = CGSizeMake(320,700);
+    [scrollView addSubview:self.subtotal];
+    [scrollView addSubview:self.tipControl];
+    [scrollView addSubview:self.tip];
+    [scrollView addSubview:self.onePersonTotal];
+    [scrollView addSubview:self.multiplePersonTotal];
+    [scrollView addSubview:self.multiplePerson];
+    [scrollView addSubview:self.subtotalLabel];
+    [scrollView addSubview:self.tipLabel];
+    [scrollView addSubview:self.totalLabel];
+    [scrollView addSubview:self.perPersonLabel];
+    [scrollView addSubview:self.personLabel];
+    [self.view addSubview:scrollView];
+    
+    // by default, hide per person options
+    [self.multiplePerson setHidden:YES];
+    [self.personLabel setHidden:YES];
+    [self.multiplePersonTotal setHidden:YES];
+    [self.perPersonLabel setHidden:YES];
     
     // set up navigation items
     self.navigationController.navigationBarHidden = YES;
