@@ -21,20 +21,9 @@
     application.statusBarHidden = NO;
     application.statusBarStyle = UIStatusBarStyleLightContent;
     
-    UITabBarController *tbc = [[UITabBarController alloc] init];
-    
     // set up view controllers
     TipViewController *tvc = [[TipViewController alloc] init];
     UINavigationController *tnc = [[UINavigationController alloc] initWithRootViewController:tvc];
-    tnc.tabBarItem.image = [UIImage imageNamed:@"calculator.png"];
-    
-    CameraViewController *cvc = [[CameraViewController alloc] init];
-    UINavigationController *cnc = [[UINavigationController alloc] initWithRootViewController:cvc];
-    
-    ReceiptsViewController *rvc = [[ReceiptsViewController alloc] init];
-    UINavigationController *rnc = [[UINavigationController alloc] initWithRootViewController:rvc];
-    
-    SettingsViewController *svc = [[SettingsViewController alloc] init];
     
     // set default tip percentages if they don't exist
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -44,8 +33,7 @@
         [defaults synchronize];
     }
     
-    tbc.viewControllers = @[tnc, cnc, rnc, svc];
-    self.window.rootViewController = tbc;
+    self.window.rootViewController = tnc;
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

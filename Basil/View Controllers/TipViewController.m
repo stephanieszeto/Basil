@@ -7,21 +7,28 @@
 //
 
 #import "TipViewController.h"
+#import "SettingsViewController.h"
 
 @interface TipViewController ()
 
-@property (weak, nonatomic) IBOutlet UITextField *subtotal;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *tipControl;
-@property (weak, nonatomic) IBOutlet UILabel *tip;
-@property (weak, nonatomic) IBOutlet UILabel *onePersonTotal;
-@property (weak, nonatomic) IBOutlet UILabel *multiplePersonTotal;
-@property (weak, nonatomic) IBOutlet UITextField *multiplePerson;
+@property (weak, nonatomic) IBOutlet UIButton *splitBillButton;
+@property (weak, nonatomic) IBOutlet UIStepper *personControl;
 
+@property (weak, nonatomic) IBOutlet UITextField *subtotal;
 @property (weak, nonatomic) IBOutlet UILabel *subtotalLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tip;
 @property (weak, nonatomic) IBOutlet UILabel *tipLabel;
+@property (weak, nonatomic) IBOutlet UILabel *total;
 @property (weak, nonatomic) IBOutlet UILabel *totalLabel;
-@property (weak, nonatomic) IBOutlet UILabel *perPersonLabel;
 @property (weak, nonatomic) IBOutlet UILabel *personLabel;
+@property (weak, nonatomic) IBOutlet UILabel *perPersonTotal;
+@property (weak, nonatomic) IBOutlet UILabel *perPersonLabel;
+
+@property (nonatomic, assign) BOOL showTotal;
+
+- (IBAction)onSplitBillButton:(id)sender;
+- (IBAction)onStepper:(id)sender;
 
 @end
 
@@ -31,7 +38,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = @"Tip";
+        self.title = @"Tip Calculator";
     }
     return self;
 }
@@ -52,6 +59,9 @@
     // recalculate tip
     [self updateValues];
     
+    // set first responder
+    //[self.subtotal becomeFirstResponder];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidChange:) name:UITextFieldTextDidChangeNotification object:self.subtotal];
 }
 
@@ -69,22 +79,27 @@
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     UIColor *greenColor = [UIColor colorWithRed:22/255.0f green:160/255.0f blue:133/255.0f alpha:1.0f];
     UIColor *whiteColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.barTintColor = greenColor;
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : whiteColor};
     self.view.backgroundColor = greenColor;
     self.subtotal.backgroundColor = [UIColor clearColor];
-    self.tabBarController.tabBar.tintColor = whiteColor;
-    self.tabBarController.tabBar.barTintColor = greenColor;
     
     // set all text coloring white
     self.subtotal.textColor = whiteColor;
     self.tipControl.tintColor = whiteColor;
     self.tip.textColor = whiteColor;
-    self.onePersonTotal.textColor = whiteColor;
-    self.multiplePersonTotal.textColor = whiteColor;
+    self.total.textColor = whiteColor;
+    self.perPersonTotal.textColor = whiteColor;
     self.subtotalLabel.textColor = whiteColor;
     self.tipLabel.textColor = whiteColor;
     self.totalLabel.textColor = whiteColor;
     self.perPersonLabel.textColor = whiteColor;
     self.personLabel.textColor = whiteColor;
+    self.personControl.tintColor = whiteColor;
+    
+    // set up navigation bar
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"gear"] style:UIBarButtonItemStylePlain target:self action:@selector(onSettingsButton)];
+    self.navigationItem.rightBarButtonItem.tintColor = whiteColor;
     
     // set up subtotal
     self.subtotal.borderStyle = UITextBorderStyleNone;
@@ -100,34 +115,30 @@
     // set up initial values
     NSString *zero = @"$0.00";
     self.tip.text = zero;
-    self.onePersonTotal.text = zero;
-    self.multiplePersonTotal.text = zero;
+    self.total.text = zero;
+    self.perPersonTotal.text = zero;
     
     // set up scroll view
     CGRect fullScreenRect = [[UIScreen mainScreen] applicationFrame];
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:fullScreenRect];
-    scrollView.contentSize = CGSizeMake(320,700);
+    scrollView.contentSize = CGSizeMake(320,600);
     [scrollView addSubview:self.subtotal];
     [scrollView addSubview:self.tipControl];
     [scrollView addSubview:self.tip];
-    [scrollView addSubview:self.onePersonTotal];
-    [scrollView addSubview:self.multiplePersonTotal];
-    [scrollView addSubview:self.multiplePerson];
+    [scrollView addSubview:self.total];
+    [scrollView addSubview:self.perPersonTotal];
     [scrollView addSubview:self.subtotalLabel];
     [scrollView addSubview:self.tipLabel];
     [scrollView addSubview:self.totalLabel];
     [scrollView addSubview:self.perPersonLabel];
     [scrollView addSubview:self.personLabel];
+    [scrollView addSubview:self.splitBillButton];
+    [scrollView addSubview:self.personControl];
     [self.view addSubview:scrollView];
     
     // by default, hide per person options
-    [self.multiplePerson setHidden:YES];
-    [self.personLabel setHidden:YES];
-    [self.multiplePersonTotal setHidden:YES];
-    [self.perPersonLabel setHidden:YES];
-    
-    // set up navigation items
-    self.navigationController.navigationBarHidden = YES;
+    self.showTotal = NO;
+    [self onSplitBillButton:self];
 }
 
 //- (void)loadView {
@@ -189,17 +200,55 @@
     float tip = subtotal * [tipPercentages[self.tipControl.selectedSegmentIndex] floatValue];
     float onePersonTotal = tip + subtotal;
     
-    NSInteger multiplePerson = [self.multiplePerson.text integerValue];
+    int numPeople = (int) self.personControl.value;
     float multiplePersonTotal;
-    if (multiplePerson) {
-        multiplePersonTotal = (onePersonTotal / multiplePerson);
+    if (numPeople) {
+        multiplePersonTotal = (onePersonTotal / numPeople);
     } else {
         multiplePersonTotal = onePersonTotal;
     }
     
     self.tip.text = [NSString stringWithFormat:@"$%0.2f", tip];
-    self.onePersonTotal.text = [NSString stringWithFormat:@"$%0.2f", onePersonTotal];
-    self.multiplePersonTotal.text = [NSString stringWithFormat:@"$%0.2f", multiplePersonTotal];
+    self.total.text = [NSString stringWithFormat:@"$%0.2f", onePersonTotal];
+    self.perPersonTotal.text = [NSString stringWithFormat:@"$%0.2f", multiplePersonTotal];
+}
+
+- (IBAction)onSplitBillButton:(id)sender {
+    if (self.showTotal) {
+        [self.personLabel setHidden:NO];
+        [self.perPersonTotal setHidden:NO];
+        [self.perPersonLabel setHidden:NO];
+        [self.personControl setHidden:NO];
+    
+        [self.total setHidden:YES];
+        [self.totalLabel setHidden:YES];
+    } else {
+        [self.total setHidden:NO];
+        [self.totalLabel setHidden:NO];
+        
+        [self.personLabel setHidden:YES];
+        [self.perPersonTotal setHidden:YES];
+        [self.perPersonLabel setHidden:YES];
+        [self.personControl setHidden:YES];
+    }
+    
+    self.showTotal = !self.showTotal;
+}
+
+- (IBAction)onStepper:(id)sender {
+    int numPeople = (int) self.personControl.value;
+    if (numPeople == 1) {
+        self.personLabel.text = [NSString stringWithFormat:@"%d PERSON", numPeople];
+    } else {
+        self.personLabel.text = [NSString stringWithFormat:@"%d PEOPLE", numPeople];
+    }
+    
+    [self updateValues];
+}
+
+- (void)onSettingsButton {
+    SettingsViewController *svc = [[SettingsViewController alloc] init];
+    [self.navigationController pushViewController:svc animated:NO];
 }
 
 @end
