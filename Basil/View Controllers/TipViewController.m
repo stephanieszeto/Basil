@@ -13,6 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *tipControl;
 @property (weak, nonatomic) IBOutlet UIButton *splitBillButton;
+@property (weak, nonatomic) IBOutlet UIView *splitBillButtonBox;
 @property (weak, nonatomic) IBOutlet UIStepper *personControl;
 
 @property (weak, nonatomic) IBOutlet UITextField *subtotal;
@@ -26,6 +27,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *perPersonLabel;
 
 @property (nonatomic, assign) BOOL showTotal;
+@property (nonatomic, assign) BOOL isPresenting;
 
 - (IBAction)onSplitBillButton:(id)sender;
 - (IBAction)onStepper:(id)sender;
@@ -96,6 +98,13 @@
     self.perPersonLabel.textColor = whiteColor;
     self.personLabel.textColor = whiteColor;
     self.personControl.tintColor = whiteColor;
+    self.splitBillButton.tintColor = whiteColor;
+    
+    // set up button
+    self.splitBillButtonBox.backgroundColor = [UIColor clearColor];
+    self.splitBillButtonBox.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.splitBillButtonBox.layer.borderWidth = 1.0f;
+    self.splitBillButtonBox.layer.cornerRadius = 5;
     
     // set up navigation bar
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"gear"] style:UIBarButtonItemStylePlain target:self action:@selector(onSettingsButton)];
@@ -119,53 +128,30 @@
     self.perPersonTotal.text = zero;
     
     // set up scroll view
-    CGRect fullScreenRect = [[UIScreen mainScreen] applicationFrame];
-    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:fullScreenRect];
-    scrollView.contentSize = CGSizeMake(320,600);
-    [scrollView addSubview:self.subtotal];
-    [scrollView addSubview:self.tipControl];
-    [scrollView addSubview:self.tip];
-    [scrollView addSubview:self.total];
-    [scrollView addSubview:self.perPersonTotal];
-    [scrollView addSubview:self.subtotalLabel];
-    [scrollView addSubview:self.tipLabel];
-    [scrollView addSubview:self.totalLabel];
-    [scrollView addSubview:self.perPersonLabel];
-    [scrollView addSubview:self.personLabel];
-    [scrollView addSubview:self.splitBillButton];
-    [scrollView addSubview:self.personControl];
-    [self.view addSubview:scrollView];
-    
-    // by default, hide per person options
-    self.showTotal = NO;
-    [self onSplitBillButton:self];
-}
-
-//- (void)loadView {
-//    // set up scroll view
 //    CGRect fullScreenRect = [[UIScreen mainScreen] applicationFrame];
 //    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:fullScreenRect];
-//    scrollView.contentSize=CGSizeMake(320,758);
-//    
-//    // add components to view
+//    scrollView.contentSize = CGSizeMake(320,600);
 //    [scrollView addSubview:self.subtotal];
 //    [scrollView addSubview:self.tipControl];
 //    [scrollView addSubview:self.tip];
-//    [scrollView addSubview:self.onePersonTotal];
-//    [scrollView addSubview:self.twoPersonTotal];
-//    [scrollView addSubview:self.threePersonTotal];
-//    [scrollView addSubview:self.fourPersonTotal];
-//    [scrollView addSubview:self.onePersonIcon];
-//    [scrollView addSubview:self.twoPersonIcon];
-//    [scrollView addSubview:self.threePersonIcon];
-//    [scrollView addSubview:self.fourPersonIcon];
-//    [scrollView addSubview:self.onePersonLabel];
-//    [scrollView addSubview:self.twoPersonLabel];
-//    [scrollView addSubview:self.threePersonLabel];
-//    [scrollView addSubview:self.fourPersonLabel];
-//    
-//    self.view = scrollView;
-//}
+//    [scrollView addSubview:self.total];
+//    [scrollView addSubview:self.perPersonTotal];
+//    [scrollView addSubview:self.subtotalLabel];
+//    [scrollView addSubview:self.tipLabel];
+//    [scrollView addSubview:self.totalLabel];
+//    [scrollView addSubview:self.perPersonLabel];
+//    [scrollView addSubview:self.personLabel];
+//    [scrollView addSubview:self.splitBillButton];
+//    [scrollView addSubview:self.personControl];
+//    [scrollView addSubview:self.splitBillButtonBox];
+//    [self.view addSubview:scrollView];
+    
+    // by default, hide per person options, split bill button
+    self.showTotal = NO;
+    [self.splitBillButton setHidden:YES];
+    [self.splitBillButtonBox setHidden:YES];
+    [self onSplitBillButton:self];
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -189,6 +175,10 @@
 }
 
 - (void)textFieldDidChange:(id)sender {
+    // show split bill button upon input
+    [self.splitBillButton setHidden:NO];
+    [self.splitBillButtonBox setHidden:NO];
+    
     [self updateValues];
 }
 
@@ -215,6 +205,7 @@
 
 - (IBAction)onSplitBillButton:(id)sender {
     if (self.showTotal) {
+        [self.splitBillButton setTitle:@"View Total" forState:UIControlStateNormal];
         [self.personLabel setHidden:NO];
         [self.perPersonTotal setHidden:NO];
         [self.perPersonLabel setHidden:NO];
@@ -223,6 +214,7 @@
         [self.total setHidden:YES];
         [self.totalLabel setHidden:YES];
     } else {
+        [self.splitBillButton setTitle:@"Split Bill" forState:UIControlStateNormal];
         [self.total setHidden:NO];
         [self.totalLabel setHidden:NO];
         
@@ -248,7 +240,58 @@
 
 - (void)onSettingsButton {
     SettingsViewController *svc = [[SettingsViewController alloc] init];
-    [self.navigationController pushViewController:svc animated:NO];
+    svc.modalPresentationStyle = UIModalPresentationCustom;
+    svc.transitioningDelegate = self;
+    [self.navigationController presentViewController:svc animated:YES completion:nil];
+}
+
+# pragma mark - UIViewControllerAnimatedTransitioning methods
+
+- (id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
+    self.isPresenting = YES;
+    return self;
+}
+
+- (id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+    self.isPresenting = NO;
+    return self;
+}
+
+# pragma mark - UIViewControllerAnimatedTransitioning methods
+
+- (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
+    return 0.5;
+}
+
+- (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
+    // retrieve all necessary components
+    UIView *containerView = [transitionContext containerView];
+    UIViewController *fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+    UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+
+    if (self.isPresenting) {
+        // add toViewController as subview (initially transparent)
+        toViewController.view.frame = containerView.frame;
+        [containerView addSubview:toViewController.view];
+        toViewController.view.alpha = 0;
+        toViewController.view.transform = CGAffineTransformMakeScale(0, 0);
+        
+        // animate SettingsViewController in
+        [UIView animateWithDuration:0.5 animations:^{
+            toViewController.view.alpha = 1;
+            toViewController.view.transform = CGAffineTransformMakeScale(0.9, 0.9);
+        } completion:^(BOOL finished) {
+            [transitionContext completeTransition:YES];
+        }];
+    } else {
+        // animate SettingsViewController out
+        [UIView animateWithDuration:0.5 animations:^{
+            fromViewController.view.alpha = 0;
+            fromViewController.view.transform = CGAffineTransformMakeScale(0, 0);
+        } completion:^(BOOL finished) {
+            [transitionContext completeTransition:YES];
+        }];
+    }
 }
 
 @end

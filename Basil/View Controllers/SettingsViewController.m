@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *customTip2;
 @property (weak, nonatomic) IBOutlet UITextField *customTip3;
 
+- (IBAction)onSaveButton:(id)sender;
+
 @end
 
 @implementation SettingsViewController
@@ -127,4 +129,7 @@
     }
 }
 
+- (IBAction)onSaveButton:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end
